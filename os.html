@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Airflow</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+
+    * {
+      color-scheme: dark;
+      font-family: "Inter Tight", "Segoe UI", "Roboto", sans-serif;
+    }
+
+    pre {
+      font-family: "JetBrains Mono";
+    }
+
+    code {
+      font-family: "JetBrains Mono";
+    }
+
+    .meta {
+      background-image: url("assets/airflow-t.png") !important;
+      background-size: contain;
+      background-repeat: no-repeat;
+      line-height: 2rem;
+      margin-right: 2rem;
+      transition: all 0.3s, margin-right 0s;
+    }
+
+    .meta:hover {
+      margin-right: 0px;
+      transition: all 0.3s, margin-right 0s;
+    }
+
+    .meta::after {
+      content: none;
+      transition: all 0.3s, margin-right 0s;
+    }
+
+    .meta:hover::after {
+      content: "  Apps";
+      transition: all 0.3s, margin-right 0s;
+    }
+
+    taskbar:hover {
+      transform: translateY(20%);
+      opacity: 1;
+    }
+
+    taskbar {
+      transform: translateY(-20%);
+      opacity: 0.5;
+    }
+
+    @media (min-width: 300px) {
+      apps {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      }
+
+      blank {
+        width: 0px;
+      }
+    }
+
+    @media (min-width: 400px) {
+      apps {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+
+      }
+
+      blank {
+        width: 0px;
+      }
+    }
+
+    @media (min-width: 480px) {
+      apps {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+      }
+
+      blank {
+        width: 0px;
+      }
+    }
+
+    @media (min-width: 640px) {
+      apps {
+        grid-template-columns: repeat(10, minmax(0, 1fr));
+      }
+
+      blank {
+        width: 0px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      apps {
+        grid-template-columns: repeat(14, minmax(0, 1fr));
+      }
+
+      blank {
+        width: 1%;
+      }
+    }
+
+    @media (min-width: 900px) {
+      apps {
+        grid-template-columns: repeat(16, minmax(0, 1fr));
+      }
+
+      blank {
+        width: 3.5%;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      apps {
+        grid-template-columns: repeat(18, minmax(0, 1fr));
+      }
+
+      blank {
+        width: 4.44%;
+      }
+    }
+
+
+    @media (min-width: 1280px) {
+      apps {
+        grid-template-columns: repeat(23, minmax(0, 1fr));
+      }
+
+      blank {
+        width: 6.44%;
+      }
+    }
+
+    @media (min-width: 1600px) {
+      apps {
+        grid-template-columns: repeat(27, minmax(0, 1fr));
+      }
+
+      blank {
+        width: 7.66%;
+      }
+    }
+
+    @media (min-width: 1900px) {
+      apps {
+        grid-template-columns: repeat(37, minmax(0, 1fr));
+      }
+
+      blank {
+        width: 7.96%;
+      }
+    }
+
+    particles {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -999999;
+    }
+
+    particles * {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -999999;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+</head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+
+<body>
+
+  <taskbar
+    class="mx-2 flex rounded-xl py-1 ring-2 ring-green-700 ring-opacity-30 transition-all duration-300 hover:ring-[3px] hover:ring-opacity-100 z-[69420] bg-black/25">
+
+
+    <button data-tooltip-target="taskbar" data-tooltip-trigger="click" type="button"
+      class="meta p m-0 ml-1 inline h-8 w-fit min-w-[2rem] justify-center rounded-lg border-2 py-0 pr-2 transition-all duration-300 hover:border-slate-600 hover:bg-slate-900 mr-8 hover:mr-0"></button>
+    <div id="taskbar" role="tooltip"
+      class="invisible opacity-0 absolute z-10 inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm tooltip dark:bg-gray-700 w-1/4 max-w-[270px] ">
+      <h1 class="text-lg">Apps</h1>
+      <hr><br>
+      <taskbar-apps class="grid grid-rows-10 grid-cols-1 w-full">
+        <button class="mb-2 px-2 py-1 rounded-lg bg-slate-800 inline hover:bg-slate-700"
+          onmousedown="spwn('RH - Google Chrome','assets/urlmultiselect.html?at=rh');">
+          <img class="h-[22px] w-[22px] inline" src="./assets/rh.png" loading="lazy"></img>
+          Browser <span class="opacity-75 text-xs inline">(RH)</span>
+        </button>
+        <button class="mb-2 px-2 py-1 rounded-lg bg-slate-800 inline hover:bg-slate-700"
+          onmousedown="spwn('I - Google Chrome','https://moist.vercel.app/');">
+          <img class="h-[22px] w-[22px] inline" src="./assets/incog.png" loading="lazy"></img>
+          Browser <span class="opacity-75 text-xs inline">(Incog)</span>
+        </button>
+        <button onmousedown="spwn('MC 1.5.2','./gs/m15/index.html')"
+          class="mb-2 px-2 py-1 rounded-lg bg-slate-800 inline hover:bg-slate-700">
+          <img class="h-[22px] w-[22px] inline" src="./assets/mc.png" loading="lazy"></img>
+          MC 1.5.2
+        </button>
+
+        <button onmousedown="spwn('Noodle Activities','./assets/urlmultiselect.html?at=noodle')"
+          class="mb-2 px-2 py-1 rounded-lg bg-slate-800 inline hover:bg-slate-700">
+          <img class="h-[22px] w-[22px] inline" src="./assets/noodle.png" loading="lazy"></img>
+          Noodle Activities
+        </button>
+        <button onmousedown="spwn('Chill Radio','./gs/chill-radio/index.html')"
+          class="mb-2 px-2 py-1 rounded-lg bg-slate-800 inline hover:bg-slate-700">
+
+          Lofi Beats <span class="opacity-75 text-xs inline">(Chill Radio)</span>
+        </button>
+        <button onmousedown="spwn('Piped','https://piped.colinslegacy.com/')"
+          class="mb-2 px-2 py-1 rounded-lg bg-slate-800 inline hover:bg-slate-700">
+
+          YouTube <span class="opacity-75 text-xs inline">(Piped)</span>
+        </button>
+        <button class="mb-2 px-2 py-1 rounded-lg bg-red-800 inline hover:bg-red-700 text-center" onmousedown="eme()">
+
+          EMERGENCY
+        </button>
+        <button onmousedown="spwn('Airflow Settings','settings.html')"
+          class="mb-2 px-2 py-1 rounded-lg bg-blue-800 inline hover:bg-blue-700">
+          <img class="h-[22px] w-[22px] inline" src="./assets/gear.png" loading="lazy"></img>
+          Settings
+        </button>
+        <button onmousedown="spwn('Airflow Partners','part.html')"
+          class="mb-2 px-2 py-1 rounded-lg bg-green-800 inline hover:bg-green-700">
+
+          Partners
+        </button>
+      </taskbar-apps>
+    </div>
+    <vsep class="border-l-[1px] bg-slate-500 block mx-2"></vsep>
+    <apps class="grid-rows-1 max-w-[100%] inline-grid w-[75%]">
+
+      <button onclick="spwn('RH - Google Chrome','assets/urlmultiselect.html?at=rh');"
+        class="app-1  px-[0.2rem] inline h-8 w-fit min-w-[2rem] justify-center rounded-lg border-2 py-0  transition-all duration-300 hover:border-slate-600 hover:bg-slate-900"><img
+          class="h-full w-full m-0 inline" src="./assets/rh.png" loading="lazy"></img> </button>
+
+      <button onclick="spwn('MC 1.5.2','./gs/m15/index.html')"
+        class="app-2  px-[0.2rem] inline h-8 w-fit min-w-[2rem] justify-center rounded-lg border-2 py-0  transition-all duration-300 hover:border-slate-600 hover:bg-slate-900"><img
+          class="h-full w-full m-0 inline" src="./assets/mc.png" loading="lazy"></img> </button>
+
+      <button onclick="spwn('Noodle Activities','./assets/urlmultiselect.html?at=noodle')"
+        class="app-3  px-[0.2rem] inline h-8 w-fit min-w-[2rem] justify-center rounded-lg border-2 py-0  transition-all duration-300 hover:border-slate-600 hover:bg-slate-900"><img
+          class="h-full w-full m-0 inline" src="./assets/noodle.png" loading="lazy"></img> </button>
+
+      <button onclick="spwn('Airflow Settings','settings.html')"
+        class="app-4  px-[0.2rem] inline h-8 w-fit min-w-[2rem] justify-center rounded-lg border-2 py-0  transition-all duration-300 hover:border-slate-600 hover:bg-slate-900"><img
+          class="h-full w-full m-0 inline" src="./assets/gear.png" loading="lazy"></img></button>
+
+
+      <button onclick="eme()"
+        class="app-5 mx-1 px-1 inline h-8 w-fit min-w-[2rem] justify-center rounded-lg border-2 py-0 pr-2 transition-all duration-300 bg-red-700 hover:border-red-900 hover:bg-red-600">❕</button>
+
+
+    </apps>
+    <vsep class="border-l-[1px] bg-slate-500 block mx-2"></vsep>
+    <blank>&nbsp;</blank>
+    <clock id="time" class="relative h-full w-max text-center text-xs float-right">--:-- ==<br />MM/DD/YY </clock>
+  </taskbar>
+
+  <desktop class="h-[92.5vh] w-[98.5%] block mx-auto ">
+    <particles id="particles-js"></particles>
+    <div
+      class="mx-auto my-2  rounded-lg block resize w-[37rem] h-[28rem] bg-black/50 border-gray-700 border-4 absolute z-1"
+      style="resize:both;" id="window">
+      <div id="wbar" class="w-full bg-gray-800  h-[1.76rem] block px-2 py-1">
+        <p id="title" class="max-w-sm inline-block">Hello World!</p> <button onclick="cl(this)"
+          class="px-2 rounded-sm  bg-red-700 hover:bg-red-600 float-right h-full  hover:text-white"
+          style="line-height:16px">✕</button>
+      </div>
+      <iframe src="welcome.html" style="width:100%; height:25.8rem; position:absolute;"></iframe>
+      <div class="resize-handle p-1 h-4 w-4 rounded-full block bg-white absolute bottom-[-15px] right-[-15px] z-[69]">
+      </div>
+    </div>
+  </desktop>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+  <script src="os.js"></script>
+  <script>
+    particlesJS("particles-js", {"particles": {"number": {"value": 48, "density": {"enable": false, "value_area": 800}}, "color": {"value": "#000000"}, "shape": {"type": "circle", "stroke": {"width": 3, "color": "#1fa22f"}, "polygon": {"nb_sides": 3}, "image": {"src": "img/github.svg", "width": 100, "height": 100}}, "opacity": {"value": 0.3, "random": true, "anim": {"enable": false, "speed": 1, "opacity_min": 0.1, "sync": false}}, "size": {"value": 35.51164387345227, "random": true, "anim": {"enable": true, "speed": 10, "size_min": 40, "sync": false}}, "line_linked": {"enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.36076771369474264, "width": 2.4051180912982844}, "move": {"enable": true, "speed": 8.017060304327615, "direction": "none", "random": true, "straight": false, "out_mode": "bounce", "bounce": false, "attract": {"enable": false, "rotateX": 600, "rotateY": 1200}}}, "interactivity": {"detect_on": "canvas", "events": {"onhover": {"enable": false, "mode": "bubble"}, "onclick": {"enable": false, "mode": "bubble"}, "resize": true}, "modes": {"grab": {"distance": 400, "line_linked": {"opacity": 1}}, "bubble": {"distance": 146.17389821424212, "size": 389.79706190464566, "duration": 0.16241544246026904, "opacity": 8, "speed": 3}, "repulse": {"distance": 200, "duration": 0.4}, "push": {"particles_nb": 4}, "remove": {"particles_nb": 2}}}, "retina_detect": true}); var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function () {stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;} requestAnimationFrame(update);}; requestAnimationFrame(update);;
+  </script>
+</body>
+
+</html>
