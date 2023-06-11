@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History is enabled | Multiple URLs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+   
+</head>
+<body>
+  <style> * {color-scheme:dark;}</style>
+  <h1 class="text-center mx-auto my-8 text-3xl">There are multiple URLs for this app.</h1>
+  <h1 class="text-center mx-auto my-8 text-2xl">Please choose one:</h1>
+  <select class="text-2xl w-[20rem]  mx-auto text-center flex focus:ring-[3px] rounded-lg hover:ring-[1px]" id="select">
+    <option selected disabled>Please select...</option>
+  </select>
+  <script>
+// Get the URLSearchParams object
+let urlParams = new URLSearchParams(window.location.search);
+
+// Get the value of the 'at' parameter
+let atParam = urlParams.get('at');
+
+// Load the script based on the value of the 'at' parameter
+let scriptElem = document.createElement('script');
+scriptElem.src = `${atParam}.js`;
+document.body.appendChild(scriptElem);
+    scriptElem.onload = () => {
+      // Get the select element
+let selectElem = document.querySelector('#select');
+
+// Loop through the urls array and add options
+urls.forEach((url) => {
+  let optionElem = document.createElement('option');
+  optionElem.value = url;
+  optionElem.textContent = url;
+  selectElem.appendChild(optionElem);
+});
+    selectElem.addEventListener('change', () => {
+  let selectedOption = selectElem.options[selectElem.selectedIndex].value;
+  document.location = selectedOption;
+});
+    }
+
+  </script>
+
+</body>
+</html>
