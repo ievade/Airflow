@@ -1,0 +1,1 @@
+var urls = ["https://freeai-node.onrender.com", "https://freeai-node2.onrender.com", "https://freeai-node.not-taken.repl.co", "https://freeai-node2.not-taken.repl.co", "https://c0.noodles.gq", "https://c1.noodles.gq", "https://c2.noodles.gq", "https://c3.noodles.gq", "https://c4.noodles.gq", "https://delightful-slug-skirt.cyclic.app"]
