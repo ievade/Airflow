@@ -1,17 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>History is enabled | Settings</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <style> * {color-scheme:dark;}</style>
-  <h1 class="text-center mx-auto my-8 text-3xl">Settings</h1>
-  
 
-</grid>
+<body>
+  <style>
+    * {
+      color-scheme: dark;
+    }
+  </style>
+  <h1 class="mx-auto my-8 text-center text-3xl">Settings</h1>
+  <grid class="mx-4 grid grid-cols-2 rounded-xl bg-black/25 px-2 py-8">
+    <div>
+      <p>Enable Tab Cloak: <input class="h-4 w-8" type="checkbox" id="tbclk" name="tbclk" value="1" /></p>
+    </div>
+    <div>
+      <p>Tab Cloak Preset:</p>
+      <select id="tcpset"
+        class="rounded-lg bg-slate-800 px-4 ring-2 ring-green-700 hover:bg-slate-900 focus:rounded-b-none focus:bg-slate-900">
+        <option value="custom">Custom</option>
+        <option value="google">Google</option>
+        <option value="classroom">Google Classroom</option>
+        <option value="drive">Google Drive</option>
+        <option value="docs">Google Docs</option>
+        <option value="sheets">Google Sheets</option>
+        <option value="slides">Google Slides</option>
+        <option value="gmail">Gmail</option>
+        <option value="canvas">Canvas</option>
+        <option value="launchpad">ClassLink Launchpad</option>
+        <option value="word">MS Word</option>
+        <option value="powerpoint">MS PowerPoint</option>
+        <option value="excel">MS Excel</option>
+        <option value="office">MS 365 (aka. Office)</option>
+        <option value="onedrive">OneDrive</option>
+        <option value="iready">I-Ready</option>
+        <option value="schoology">Schoology</option>
+      </select>
+    </div>
+    <div>
+      <p>Custom Tab Cloak URL: <textarea id="ctcurl" cols="36" rows="1"
+          class="resize-none rounded-lg bg-slate-800 px-3 ring-2 ring-green-700 hover:bg-slate-900 focus:bg-slate-900"
+          maxlength="350" placeholder="https://google.com/favicon.ico"></textarea></p>
+    </div>
+    <div>
+      <p>Custom Tab Cloak Name: <textarea id="ctcn" cols="36" rows="1"
+          class="resize-none rounded-lg bg-slate-800 px-3 ring-2 ring-green-700 hover:bg-slate-900 focus:bg-slate-900"
+          maxlength="350" placeholder="Google"></textarea></p>
+    </div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div>
+      <p>
+        Emergency Button Preset:<br />
+        <select id="emepset"
+          class="rounded-lg bg-slate-800 px-4 ring-2 ring-green-700 hover:bg-slate-900 focus:rounded-b-none focus:bg-slate-900">
+          <option value="custom">Custom</option>
+          <option value="google">Google</option>
+          <option value="classroom">Google Classroom</option>
+          <option value="drive">Google Drive</option>
+          <option value="docs">Google Docs</option>
+          <option value="sheets">Google Sheets</option>
+          <option value="slides">Google Slides</option>
+          <option value="gmail">Gmail</option>
+          <option value="canvas">Canvas</option>
+          <option value="launchpad">ClassLink Launchpad</option>
+          <option value="office">MS 365 (aka. Office)</option>
+          <option value="onedrive">OneDrive</option>
+          <option value="iready">I-Ready</option>
+          <option value="schoology">Schoology</option>
+        </select>
+      </p>
+    </div>
+    <div>
+      <p>Custom Emergency Button URL: <textarea id="emeurl" cols="36" rows="1"
+          class="resize-none rounded-lg bg-slate-800 px-3 ring-2 ring-green-700 hover:bg-slate-900 focus:bg-slate-900"
+          maxlength="350" placeholder="https://www.google.com"></textarea></p>
+    </div>
+    <div>
+      <button onclick="save()" class="rounded-lg bg-green-700 px-4 py-2 hover:bg-green-800">Save Changes</button>
+      <button onclick="reset()" class="rounded-lg bg-red-700 px-4 py-2 hover:bg-red-800">Reset to Defaults</button>
+    </div>
+  </grid>
+
+  <script>
+    window.onload = function () {
+      // Get the settings object from local storage
+      var settingsJSON = localStorage.getItem("settings");
+
+      if (settingsJSON !== null) {
+        // Parse the settings object from the JSON string
+        var settings = JSON.parse(settingsJSON);
+
+        // Set the values of the six elements to match the saved settings
+        document.getElementById("tbclk").checked = settings.tbclk;
+        document.getElementById("tcpset").value = settings.tcpset;
+        document.getElementById("ctcurl").value = settings.ctcurl;
+        document.getElementById("ctcn").value = settings.ctcn;
+        document.getElementById("emepset").value = settings.emepset;
+        document.getElementById("emeurl").value = settings.emeurl;
+      }
+    }
+    function save() {
+      // Get the values of the six elements
+      var tbclk = document.getElementById("tbclk").checked;
+      var tcpset = document.getElementById("tcpset").value;
+      var ctcurl = document.getElementById("ctcurl").value;
+      var ctcn = document.getElementById("ctcn").value;
+      var emepset = document.getElementById("emepset").value;
+      var emeurl = document.getElementById("emeurl").value;
+
+      // Create an object with the six values
+      var settings = {
+        "tbclk": tbclk,
+        "tcpset": tcpset,
+        "ctcurl": ctcurl,
+        "ctcn": ctcn,
+        "emepset": emepset,
+        "emeurl": emeurl
+      };
+
+      // Convert the object to a JSON string
+      var settingsJSON = JSON.stringify(settings);
+
+      // Save the settings to local storage
+      localStorage.setItem("settings", settingsJSON);
+      alert("Done.");
+    }
+    function reset() {
+      // Prompt the user for confirmation
+      var confirmed = confirm("Are you sure you want to reset the settings? This action cannot be undone.");
+
+      if (confirmed) {
+        // Delete the settings object from local storage
+        localStorage.removeItem("settings");
+      }
+    }
+  </script>
 </body>
+
 </html>

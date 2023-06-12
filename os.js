@@ -1,3 +1,99 @@
+
+var tbpset = {
+  "google": ["Google","https://www.google.com/favicon.ico"],
+  "classroom": ["Classes" ,"https://ssl.gstatic.com/classroom/ic_product_classroom_32.png"],
+  "drive":["My Drive - Google Drive","https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png"],
+  "docs":["Google Docs","https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"],
+  "sheets": ["Google Sheets","https://ssl.gstatic.com/docs/spreadsheets/favicon3.ico"],
+  "slides": ["Google Slides","https://ssl.gstatic.com/docs/presentations/images/favicon5.ico"],
+  "gmail": ["Inbox (69) - Gmail","https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico"],
+  "canvas": ["Log In to Canvas","https://canvas.instructure.com/favicon.ico"],
+  "launchpad": ["Login","https://cdn.classlink.com/production/launchpad/resources/images/favicon/favicon-32x32.png"],
+  "office": ["Home | Microsoft 365","https://res.cdn.office.net/officehub/images/content/images/favicon_m365-67350a08e8.ico"],
+  "iready": ["i-Ready Login","https://login.i-ready.com/favicon.ico"],
+  "schoology": ["Schoology Learning | PowerSchool","https://www.powerschool.com/favicon.ico"]
+}
+var emepset = {
+  "google":"https://google.com",
+  "classroom":"https://classroom.google.com",
+  "drive":"https://drive.google.com",
+  "docs":"https://docs.google.com",
+  "sheets":"https://sheets.google.com",
+  "slides":"https://slides.google.com",
+  "gmail":"https://mail.google.com",
+  "canvas":"https://canvas.instructure.com",
+  "launchpad":"https://launchpad.classlink.com",
+  "office":"https://office.com",
+  "iready":"https://login.i-ready.com",
+  "schoology":"https://www.powerschool.com/"
+}
+
+
+const clktab = () => {
+    // Get the settings object from local storage
+    const settingsJSON = localStorage.getItem('settings');
+
+    if (settingsJSON !== null ) {
+        // Parse the settings object from the JSON string
+        const settings = JSON.parse(settingsJSON);
+        if (!settings.tbclk) {return}
+        // Get the value of the current tab preset
+        const currentPreset = settings.tcpset;
+
+        // Set the tab title and icon based on the value of the current tab preset
+        if (currentPreset === 'custom') {
+            // If the current tab preset is 'custom', set the tab title and icon to the values of ctcurl and ctcn, respectively
+            const ctcurl = settings.ctcurl;
+            const ctcn = settings.ctcn;
+            document.title = ctcn;
+            const iconLink = document.querySelector('link[rel="shortcut icon"]');
+            if (iconLink !== null) {
+                iconLink.href = ctcurl;
+            } else {
+                const newIconLink = document.createElement('link');
+                newIconLink.rel = 'shortcut icon';
+                newIconLink.href = ctcurl;
+                document.head.appendChild(newIconLink);
+            }
+        } else {
+            // If the current tab preset is not 'custom', set the tab title and icon to the values in the tbpset object based on the value of the current tab preset in the settings object
+            const tbpsetTitleValue = tbpset[currentPreset][0];
+            const tbpsetIconValue = tbpset[currentPreset][1];
+            document.title = tbpsetTitleValue;
+            const iconLink = document.querySelector('link[rel="shortcut icon"]');
+            if (iconLink !== null) {
+                iconLink.href = tbpsetIconValue;
+            } else {
+                const newIconLink = document.createElement('link');
+                newIconLink.rel = 'shortcut icon';
+                newIconLink.href = tbpsetIconValue;
+                document.head.appendChild(newIconLink);
+            }
+        }
+    }
+};
+window.onload = () => {
+   var settingsJSON = localStorage.getItem('settings');
+   var settings = JSON.parse(settingsJSON);
+ var oldtbclk = settings.tbclk;
+  setTimeout(() => {
+    var settingsJSON = localStorage.getItem('settings');
+   var settings = JSON.parse(settingsJSON);
+  
+    if (settings.tbclk) {clktab()}
+  },500)
+  setInterval(() => {
+   
+ var settingsJSON = localStorage.getItem('settings');
+   var settings = JSON.parse(settingsJSON);
+    console.log(oldtbclk,settings.tbclk)
+     if (oldtbclk != settings.tbclk  ) {
+       location.reload();
+     }
+   
+   
+  },500)
+}
 setInterval(() => {
 
   const epoch = Math.floor(Date.now());
@@ -20,7 +116,14 @@ function cl(ele) {
   ele.parentElement.parentElement.remove()
 }
 function eme() {
-  document.location = "https://www.google.com"
+  var settingsJSON = localStorage.getItem("settings");
+  if (settingsJSON == null) {alert("The Emergency Button is not configured.");return;}
+  var settings = JSON.parse(settingsJSON);
+  if (settings['emepset'] != "custom") {
+    document.location = emepset[settings['emepset']]
+  } else {
+    document.location = settings['emeurl']
+  }
 }
 
 
@@ -139,3 +242,7 @@ console.log("windowElem: ", windowElem);
     console.log(cbl);
   rw.innerHTML += `<iframe style="width:100%; height:100%; z-index:-32767;" src="${c}"></iframe>`;
 }
+
+
+
+
